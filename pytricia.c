@@ -79,6 +79,10 @@ _prefix_convert(int family, const char *addr, prefix_t* prefix) {
     int prefixlen = -1;
     char addrcopy[128];
 
+    if (strlen(addr) < 2) {
+        return 0;
+    }
+
     strncpy(addrcopy, addr, 128);
     char *slash = strchr(addrcopy, '/');
     if (slash != NULL) {

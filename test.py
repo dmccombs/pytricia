@@ -284,7 +284,7 @@ class PyTriciaTests(unittest.TestCase):
             val = pyt.insert("fe80::1") # should raise an exception
 
     def testInsertValidShortV6(self):
-        pyt = pytricia.PyTricia()
+        pyt = pytricia.PyTricia(128)
         val = pyt.insert("::2", "a") # A valid short IPv6 address should succeed
         self.assertIs(val, None)
         self.assertEqual(len(pyt), 1)
@@ -292,7 +292,7 @@ class PyTriciaTests(unittest.TestCase):
         self.assertIn("::2", pyt)
 
     def testInsertInvalidShortV6(self):
-        pyt = pytricia.PyTricia()
+        pyt = pytricia.PyTricia(128)
         with self.assertRaisesRegex(ValueError, "Invalid key.") as cm:
             val = pyt.insert(":2:", "a") # should raise an exception
 
