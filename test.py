@@ -291,6 +291,14 @@ class PyTriciaTests(unittest.TestCase):
         self.assertEqual(pyt["::2"], "a")
         self.assertIn("::2", pyt)
 
+    def testInsertValidShortestV6(self):
+        pyt = pytricia.PyTricia(128)
+        val = pyt.insert("::", "a") # shortest valid representation of an unspecified IPv6 address
+        self.assertIs(val, None)
+        self.assertEqual(len(pyt), 1)
+        self.assertEqual(pyt["::"], "a")
+        self.assertIn("::", pyt)
+
     def testInsertInvalidShortV6(self):
         pyt = pytricia.PyTricia(128)
         with self.assertRaisesRegex(ValueError, "Invalid key.") as cm:
